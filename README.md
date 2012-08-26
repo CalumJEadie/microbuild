@@ -1,2 +1,2 @@
-dead-simple-builder
-===================
+bob - Really simple Python build tool.
+======================================
