@@ -5,7 +5,7 @@ bob - Really simple Python build tool.
 import inspect
 import argparse
 
-    
+_CREDIT_LINE = "Powered by bob - A really simple Python build tool."
     
 def build(module,args):
     """
@@ -21,15 +21,58 @@ def build(module,args):
     # Parse arguments.
     args = parser.parse_args(args)
 
+    # Run task and all it's dependancies.
+    _run_from_task_name(module,args.task)
+    
+def _run_from_task_name(module,task_name):
+    
+    task = getattr(module,task_name)
+    _run(module,task,set([]))
+    
+def _run(module,task,completed_tasks):
+    """
+    @type module: module
+    @type task: Task
+    @type completed_tasts: set Task
+    @rtype: set Task
+    @return: Updated set of completed tasks after satisfying all dependancies.
+    """
 
+    # Satsify dependancies recursively. Maintain set of completed tasks so each
+    # task is only performed once.
+    for dependancy in task.dependancies:
+        completed_tasks = _run(module,dependancy,completed_tasks)
+
+    # Perform current task, if need to.
+    if task not in completed_tasks:
+        task()
+        completed_tasks.add(task)
+    
+    return completed_tasks
 
 def _create_parser(module):
 
+    # Get all tasks.
+    tasks = _get_tasks(module)
+    
+    # Get task names.
+    task_names = [task.__name__ for task in tasks]
+    
+    # Build epilog to describe the tasks.
+    epilog = "tasks:"
+    name_width = _get_max_name_length(module)+4
+    task_help_format = "\n  {0.__name__:<%s} {0.__doc__}" % name_width
+    for task in tasks:
+        epilog += task_help_format.format(task)
+    epilog += "\n\n"+_CREDIT_LINE
+    
+    # Build parser.
+    # Use RawDescriptionHelpFormatter so epilog is not linewrapped.
     parser = argparse.ArgumentParser(
-        epilog="Powered by bob - a really simple Python build tool."
+        epilog=epilog,
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
-        
-    parser.add_argument("task",help="Build task.",choices=["clean","html","android"])
+    parser.add_argument("task",help="perform specified task and all it's dependancies",choices=task_names,metavar="task")
     
     return parser
 
@@ -78,7 +121,7 @@ class _TaskDecorator(object):
                     if i == 0:
                         raise TaskDecorationException("Replace use of @task with @task().")
                     else:
-                        raise TaskDecorationException("%s is not a task. Every dependancy references by a task should be a task." % decorator_args[i])
+                        raise TaskDecorationException("%s is not a task. Each dependancy should be a task." % decorator_args[i])
                 else:
                     raise TaskDecorationException("%s is not a task." % decorator_args[i])
         
@@ -125,3 +168,9 @@ def _get_tasks(module):
     # Get all functions that are marked as task and pull out the task object
     # from each (name,value) pair.
     return [member[1] for member in inspect.getmembers(module,Task.is_task)]
+    
+def _get_max_name_length(module):
+    """
+    Returns the length of the longest task name.
+    """
+    return max([len(task.__name__) for task in _get_tasks(module)])
