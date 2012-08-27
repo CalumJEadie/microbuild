@@ -11,12 +11,6 @@ import unittest
 from .. import bob
 
 class TestBuildSimple(unittest.TestCase):
-
-    def test_get_functions(self):
-        import build_simple
-        fs = bob._get_functions(build_simple)
-        print fs
-        self.assertEqual(len(fs),6)
         
     def test_get_tasks(self):
         import build_simple
