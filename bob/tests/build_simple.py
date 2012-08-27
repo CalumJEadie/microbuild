@@ -1,24 +1,42 @@
+#!/usr/bin/python
+
+import sys
 from .. import bob
 
-@bob.task
+@bob.task()
 def clean():
-    pass
+    """Clean build directory."""
 
-@bob.task
+    print "clean"
+
+@bob.task()
 def html():
-    pass
+    """Generate HTML."""
+    
+    print "html"
 
-@bob.task
+@bob.task()
 def images():
-    pass
+    """Prepare images."""
 
-@bob.task
+    print "images"
+
+@bob.task()
 def android():
-    pass
+    """Package Android app."""
 
-@bob.task
+    print "android"
+
+@bob.task()
 def ios():
-    pass
+    """Package iOS app."""
+
+    print "ios"
     
 def some_utility_method():
-    pass
+    """Some utility method."""
+
+    print "some utility method"
+    
+if __name__ == "__main__":
+    bob.build(sys.modules[__name__],sys.argv[1:])

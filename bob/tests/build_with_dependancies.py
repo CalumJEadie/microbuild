@@ -1,24 +1,36 @@
-from ..bob import task
+from .. import bob
 
-@task
+@bob.task()
 def clean():
-    pass
+    """Clean build directory."""
 
-@task
+    print "clean"
+
+@bob.task(clean)
 def html():
-    pass
+    """Generate HTML."""
+    
+    print "html"
 
-@task
+@bob.task(clean)
 def images():
-    pass
+    """Prepare images."""
 
-@task
+    print "images"
+
+@bob.task(clean,html,images)
 def android():
-    pass
+    """Package Android app."""
 
-@task
+    print "android"
+
+@bob.task(clean,html,images)
 def ios():
-    pass
+    """Package iOS app."""
+
+    print "ios"
     
 def some_utility_method():
-    pass
+    """Some utility method."""
+
+    print "some utility method"

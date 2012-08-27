@@ -17,6 +17,31 @@ class TestBuildSimple(unittest.TestCase):
         ts = bob._get_tasks(build_simple)
         print ts
         self.assertEqual(len(ts),5)
+        
+class TestBuildWithDependancies(unittest.TestCase):
+        
+    def test_get_tasks(self):
+        import build_with_dependancies
+        ts = bob._get_tasks(build_with_dependancies)
+        print ts
+        self.assertEqual(len(ts),5)
+        
+class TestDecorationValidation(unittest.TestCase):
+
+    def test_1(self):
+        with self.assertRaises(bob.TaskDecorationException) as cm:
+            import build_with_annotation_misuse_1
+        print cm.exception
+
+    def test_2(self):
+        with self.assertRaises(bob.TaskDecorationException) as cm:
+            import build_with_annotation_misuse_2
+        print cm.exception
+
+    def test_3(self):
+        with self.assertRaises(bob.TaskDecorationException) as cm:
+            import build_with_annotation_misuse_3
+        print cm.exception
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
