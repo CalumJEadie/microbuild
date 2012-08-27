@@ -148,7 +148,7 @@ class Task(object):
         """
         self.func = func
         self.__name__ = func.__name__
-        self.__doc__ = func.__doc__
+        self.__doc__ = inspect.getdoc(func)
         self.__module__ = func.__module__
         self.dependancies = dependancies
         
