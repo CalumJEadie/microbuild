@@ -1,4 +1,4 @@
-from .. import bob
+from ... import bob
 
 @bob.task()
 def clean():

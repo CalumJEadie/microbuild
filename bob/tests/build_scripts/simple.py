@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import sys
-from .. import bob
+from ... import bob
 
 @bob.task()
 def clean():

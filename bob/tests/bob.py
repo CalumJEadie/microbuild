@@ -13,16 +13,16 @@ from .. import bob
 class TestBuildSimple(unittest.TestCase):
         
     def test_get_tasks(self):
-        import build_simple
-        ts = bob._get_tasks(build_simple)
+        import build_scripts.simple
+        ts = bob._get_tasks(build_scripts.simple)
         print ts
         self.assertEqual(len(ts),5)
         
 class TestBuildWithDependancies(unittest.TestCase):
         
     def test_get_tasks(self):
-        import build_with_dependancies
-        ts = bob._get_tasks(build_with_dependancies)
+        import build_scripts.dependancies
+        ts = bob._get_tasks(build_scripts.dependancies)
         print ts
         self.assertEqual(len(ts),5)
         
@@ -30,17 +30,17 @@ class TestDecorationValidation(unittest.TestCase):
 
     def test_1(self):
         with self.assertRaises(bob.TaskDecorationException) as cm:
-            import build_with_annotation_misuse_1
+            import build_scripts.annotation_misuse_1
         print cm.exception
 
     def test_2(self):
         with self.assertRaises(bob.TaskDecorationException) as cm:
-            import build_with_annotation_misuse_2
+            import build_scripts.annotation_misuse_2
         print cm.exception
 
     def test_3(self):
         with self.assertRaises(bob.TaskDecorationException) as cm:
-            import build_with_annotation_misuse_3
+            import build_scripts.annotation_misuse_3
         print cm.exception
 
 if __name__ == "__main__":

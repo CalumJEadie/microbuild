@@ -1,4 +1,4 @@
-from .. import bob
+from ... import bob
 
 # Uses @bob.task form instead of @bob.task() form.
 @bob.task
