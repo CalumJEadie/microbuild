@@ -23,10 +23,5 @@ def android():
     """Package Android app."""
     print "Packaging android app..."
     
-def some_utility_method():
-    """Some utility method."""
-
-    print "some utility method"
-    
 if __name__ == "__main__":
     build(sys.modules[__name__],sys.argv[1:])

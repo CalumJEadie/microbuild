@@ -6,9 +6,15 @@ Calum J. Eadie (www.calumjeadie.com)
 
 * Really quick to learn.
 * Manages dependancies between tasks.
-* Automatically generates command line options and help.
+* Automatically generates command line interface and help.
 
 ## Example
+
+The build script is written in pure Python and microbuild takes care of managing
+dependancies between tasks and generating command line interface and help.
+
+Tasks are just regular Python functions marked with the @task decorator.
+Dependancies are specified with @task too.
 
         # example.py
         import sys
@@ -34,15 +40,10 @@ Calum J. Eadie (www.calumjeadie.com)
             """Package Android app."""
             print "Packaging android app..."
             
-        def some_utility_method():
-            """Some utility method."""
-
-            print "some utility method"
-            
         if __name__ == "__main__":
             build(sys.modules[__name__],sys.argv[1:])
             
-        
+Command line interface and help is automatically generated.
         
         $ ./example.py -h 
         usage: example.py [-h] task
@@ -59,13 +60,14 @@ Calum J. Eadie (www.calumjeadie.com)
           html        Generate HTML.
           images      Prepare images.
           
+Dependancies between tasks are taken care of too.
+    
         $ ./example.py android
         
         Cleaning build directory...
         Generating HTML...
         Preparing images...
         Packaging android app...
-
 
 ## Installation
 
