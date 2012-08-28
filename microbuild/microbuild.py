@@ -5,7 +5,7 @@ microbuild - Really simple Python build tool.
 import inspect
 import argparse
 
-_CREDIT_LINE = "Powered by microbuild - A really simple Python build tool."
+_CREDIT_LINE = "Powered by microbuild - A Lightweight Python Build Tool."
     
 def build(module,args):
     """
