@@ -83,4 +83,6 @@ Using easy_install:
     
 # License
 
-microbuild is licensed under a MIT license. See LICENSE.txt.
+microbuild is licensed under a MIT license. See [LICENSE.txt][1].
+
+[1]: https://github.com/CalumJEadie/microbuild/blob/master/LICENSE.txt
