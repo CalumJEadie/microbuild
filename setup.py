@@ -4,6 +4,7 @@ setup(
    name="microbuild",
    version="0.1.0",
    author="Calum J. Eadie",
+   author_email="calum@calumjeadie.com",
    packages=["microbuild"],
    license=open("LICENSE.txt").read(),
    description="Really simple Python build tool.",
