@@ -1,16 +1,23 @@
-# microbuild - Really straightforward, lightweight, Python build tool.
+# microbuild - Straightforward lightweight Python build tool.
 
-## Useful references for Python decorators
+Calum J. Eadie (www.calumjeadie.com)
 
-http://code.sweyla.com/articles/python/decorators/
-http://www.artima.com/weblogs/viewpost.jsp?thread=240808 - Introduction to Decorators
-http://www.artima.com/weblogs/viewpost.jsp?thread=240845 - Decorator arguments
-http://www.artima.com/weblogs/viewpost.jsp?thread=241209 - Decorator based build system
-http://micheles.googlecode.com/hg/decorator/documentation3.html
-http://docs.python.org/library/functools.html#functools.wraps
-http://mrcoles.com/blog/3-decorator-examples-and-awesome-python/
+MIT License
 
-## Other references
+## Features
 
-http://epydoc.sourceforge.net/
-http://epydoc.sourceforge.net/manual-epytext.html
+* Really quick to learn.
+* Manages dependancies between tasks.
+* Automatically generates command line options and help.
+
+## Installation
+
+You can install microbuild from the Python Package Index (PyPI) or from source.
+
+Using pip:
+
+    $ pip microbuild
+
+Using easy_install:
+
+    $ easy_install microbuild
