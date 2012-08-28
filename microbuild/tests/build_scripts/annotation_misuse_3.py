@@ -1,10 +1,10 @@
-from ... import bob
+from ... import microbuild
 
-@bob.task()
+@microbuild.task()
 def clean():
     pass
     
 # Referring to clean by name rather than reference.
-@bob.task("clean")
+@microbuild.task("clean")
 def html():
     pass

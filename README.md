@@ -1,4 +1,4 @@
-# bob - Really simple Python build tool.
+# microbuild - Really straightforward, lightweight, Python build tool.
 
 ## Useful references for Python decorators
 

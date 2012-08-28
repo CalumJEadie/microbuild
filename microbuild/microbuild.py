@@ -1,11 +1,11 @@
 """
-bob - Really simple Python build tool.
+microbuild - Really simple Python build tool.
 """
 
 import inspect
 import argparse
 
-_CREDIT_LINE = "Powered by bob - A really simple Python build tool."
+_CREDIT_LINE = "Powered by microbuild - A really simple Python build tool."
     
 def build(module,args):
     """

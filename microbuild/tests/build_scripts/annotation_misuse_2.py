@@ -1,6 +1,6 @@
-from ... import bob
+from ... import microbuild
 
-@bob.task()
+@microbuild.task()
 def clean():
     pass
     
@@ -9,6 +9,6 @@ def html():
     pass
 
 # References a non task.
-@bob.task(clean,html)
+@microbuild.task(clean,html)
 def android():
     pass
