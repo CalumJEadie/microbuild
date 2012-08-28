@@ -16,6 +16,9 @@ any dependancies between tasks and generating a command line interface.
 Tasks are just regular Python functions marked with the `@task` decorator. Dependancies
 are specified with `@task` too.
 
+After defining all tasks `build(sys.modules[__name__],sys.argv[1:])` is called to
+run the build.
+
     # example.py
     import sys
     from microbuild.microbuild import task,build
