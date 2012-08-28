@@ -9,6 +9,5 @@ setup(
    packages=["microbuild"],
    license="MIT License",
    description="Lightweight Python Build Tool.",
-   long_description=open("README.md").read(),
-   install_requires=[],
+   long_description=open("README.md").read()
 )
