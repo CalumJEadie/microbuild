@@ -43,7 +43,8 @@ are specified with `@task` too.
     if __name__ == "__main__":
         build(sys.modules[__name__],sys.argv[1:])
             
-The command line interface and help is automatically generated.
+The command line interface and help is automatically generated. Task descriptions
+are extracted from function docstrings.
         
     $ ./example.py -h
     usage: example.py [-h] task
