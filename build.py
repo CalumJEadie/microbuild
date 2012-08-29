@@ -19,6 +19,7 @@ def test():
     subprocess.call(["python","-m","microbuild.tests.microbuild"])
     subprocess.call(["python","-m","microbuild.tests.build_scripts.dependancies","-h"])
     subprocess.call(["python","-m","microbuild.tests.build_scripts.dependancies","android"])
+    subprocess.call(["python","-m","microbuild.tests.build_scripts.runtime_error","android"])
     
 if __name__ == "__main__":
     microbuild.build(sys.modules[__name__],sys.argv[1:])
