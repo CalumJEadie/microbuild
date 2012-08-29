@@ -4,8 +4,12 @@ microbuild - Really simple Python build tool.
 
 import inspect
 import argparse
+import logging
+import sys
+import traceback
 
 _CREDIT_LINE = "Powered by microbuild - A Lightweight Python Build Tool."
+_LOGGING_FORMAT = "[ %(message)s ]"
     
 def build(module,args):
     """
@@ -25,13 +29,18 @@ def build(module,args):
     _run_from_task_name(module,args.task)
     
 def _run_from_task_name(module,task_name):
+
+    # Create logger.
+    logging.basicConfig(level=logging.INFO,format=_LOGGING_FORMAT)
+    logger = logging.getLogger(module.__name__)
     
     task = getattr(module,task_name)
-    _run(module,task,set([]))
+    _run(module,logger,task,set([]))
     
-def _run(module,task,completed_tasks):
+def _run(module,logger,task,completed_tasks):
     """
     @type module: module
+    @type logging: Logger
     @type task: Task
     @type completed_tasts: set Task
     @rtype: set Task
@@ -41,11 +50,24 @@ def _run(module,task,completed_tasks):
     # Satsify dependancies recursively. Maintain set of completed tasks so each
     # task is only performed once.
     for dependancy in task.dependancies:
-        completed_tasks = _run(module,dependancy,completed_tasks)
+        completed_tasks = _run(module,logger,dependancy,completed_tasks)
 
     # Perform current task, if need to.
     if task not in completed_tasks:
-        task()
+
+        logging.info("Starting task \"%s\"" % task.__name__)
+
+        try:
+            # Run task.
+            task()
+        except:
+            logging.critical("Error in task \"%s\"" % task.__name__)
+            traceback.print_exc()
+            logging.critical("Build aborted")
+            sys.exit()
+        
+        logging.info("Completed task \"%s\"" % task.__name__)
+        
         completed_tasks.add(task)
     
     return completed_tasks
