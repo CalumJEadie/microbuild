@@ -11,9 +11,10 @@ import argparse
 import logging
 import sys
 import traceback
+import os
 
 _CREDIT_LINE = "Powered by microbuild - A Lightweight Python Build Tool."
-_LOGGING_FORMAT = "[ %(message)s ]"
+_LOGGING_FORMAT = "[ %(name)s - %(message)s ]"
     
 def build(module,args):
     """
@@ -35,11 +36,31 @@ def build(module,args):
 def _run_from_task_name(module,task_name):
 
     # Create logger.
-    logging.basicConfig(level=logging.INFO,format=_LOGGING_FORMAT)
-    logger = logging.getLogger(module.__name__)
+    logger = _get_logger(module)
     
     task = getattr(module,task_name)
     _run(module,logger,task,set([]))
+    
+def _get_logger(module):
+
+    # Create Logger
+    logger = logging.getLogger(os.path.basename(module.__file__))
+    logger.setLevel(logging.DEBUG)
+
+    # Create console handler and set level to debug
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+
+    # Create formatter
+    formatter = logging.Formatter(_LOGGING_FORMAT)
+
+    # Add formatter to ch
+    ch.setFormatter(formatter)
+
+    # Add ch to logger
+    logger.addHandler(ch)
+
+    return logger
     
 def _run(module,logger,task,completed_tasks):
     """
@@ -59,18 +80,18 @@ def _run(module,logger,task,completed_tasks):
     # Perform current task, if need to.
     if task not in completed_tasks:
 
-        logging.info("Starting task \"%s\"" % task.__name__)
+        logger.info("Starting task \"%s\"" % task.__name__)
 
         try:
             # Run task.
             task()
         except:
-            logging.critical("Error in task \"%s\"" % task.__name__)
+            logger.critical("Error in task \"%s\"" % task.__name__)
             traceback.print_exc()
-            logging.critical("Build aborted")
+            logger.critical("Build aborted")
             sys.exit()
         
-        logging.info("Completed task \"%s\"" % task.__name__)
+        logger.info("Completed task \"%s\"" % task.__name__)
         
         completed_tasks.add(task)
     
