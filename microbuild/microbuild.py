@@ -80,18 +80,24 @@ def _run(module,logger,task,completed_tasks):
     # Perform current task, if need to.
     if task not in completed_tasks:
 
-        logger.info("Starting task \"%s\"" % task.__name__)
-
-        try:
-            # Run task.
-            task()
-        except:
-            logger.critical("Error in task \"%s\"" % task.__name__)
-            traceback.print_exc()
-            logger.critical("Build aborted")
-            sys.exit()
+        if task.is_ignorable():
         
-        logger.info("Completed task \"%s\"" % task.__name__)
+            logger.info("Ignoring task \"%s\"" % task.__name__)
+            
+        else:
+
+            logger.info("Starting task \"%s\"" % task.__name__)
+
+            try:
+                # Run task.
+                task()
+            except:
+                logger.critical("Error in task \"%s\"" % task.__name__)
+                traceback.print_exc()
+                logger.critical("Build aborted")
+                sys.exit()
+            
+            logger.info("Completed task \"%s\"" % task.__name__)
         
         completed_tasks.add(task)
     
@@ -185,6 +191,13 @@ class _TaskDecorator(object):
         
 # Abbreviate for convenience.
 task = _TaskDecorator
+
+def ignore(obj):
+    """
+    Decorator to specify that a task should be ignored.
+    """
+    obj.ignorable = True
+    return obj
         
 class Task(object):
     
@@ -207,6 +220,12 @@ class Task(object):
         Returns true is an object is a build task.
         """
         return isinstance(obj,cls)
+        
+    def is_ignorable(self):
+        """
+        Returns true if task can be ignored.
+        """
+        return ( hasattr(self,'ignorable') and self.ignorable == True ) or ( hasattr(self.func,'ignorable') and self.func.ignorable == True )
     
 def _get_tasks(module):
     """

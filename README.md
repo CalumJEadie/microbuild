@@ -13,8 +13,8 @@ Calum J. Eadie (www.calumjeadie.com)
 The build script is written in pure Python and microbuild takes care of managing
 any dependancies between tasks and generating a command line interface.
 
-Tasks are just regular Python functions marked with the `@task` decorator. Dependancies
-are specified with `@task` too.
+Tasks are just regular Python functions marked with the `@task()` decorator. Dependancies
+are specified with `@task()` too. Tasks can be ignored with the `@ignore` decorator.
 
 After defining all tasks `build(sys.modules[__name__],sys.argv[1:])` is called to
 run the build.
@@ -33,6 +33,7 @@ run the build.
         """Generate HTML."""
         print "Generating HTML..."
 
+    @ignore
     @task(clean)
     def images():
         """Prepare images."""
@@ -67,10 +68,16 @@ are extracted from function docstrings.
 Dependancies between tasks are taken care of too.
     
     $ ./example.py android
+    [ example.py - Starting task "clean" ]
     Cleaning build directory...
+    [ example.py - Completed task "clean" ]
+    [ example.py - Starting task "html" ]
     Generating HTML...
-    Preparing images...
+    [ example.py - Completed task "html" ]
+    [ example.py - Ignoring task "images" ]
+    [ example.py - Starting task "android" ]
     Packaging android app...
+    [ example.py - Completed task "android" ]
 
 ## Installation
 

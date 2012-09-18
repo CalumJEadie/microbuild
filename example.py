@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import sys
-from microbuild.microbuild import task,build
+from microbuild.microbuild import task,ignore,build
 
 @task()
 def clean():
@@ -13,6 +13,7 @@ def html():
     """Generate HTML."""
     print "Generating HTML..."
 
+@ignore
 @task(clean)
 def images():
     """Prepare images."""

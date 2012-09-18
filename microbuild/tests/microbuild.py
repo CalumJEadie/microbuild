@@ -42,6 +42,23 @@ class TestDecorationValidation(unittest.TestCase):
         with self.assertRaises(microbuild.TaskDecorationException) as cm:
             import build_scripts.annotation_misuse_3
         print cm.exception
+        
+class TestIgnore(unittest.TestCase):
+
+    def test_ignore_before(self):
+        import build_scripts.ignore_before
+        microbuild.build(build_scripts.ignore_before,["android"])
+
+    def test_ignore_after(self):
+        import build_scripts.ignore_after
+        microbuild.build(build_scripts.ignore_after,["android"])
+        
+class TestRuntimeError(unittest.TestCase):
+
+    def test_no_exception_raised(self):
+        import build_scripts.runtime_error
+        with self.assertRaises(SystemExit):
+            microbuild.build(build_scripts.runtime_error,["android"])
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
