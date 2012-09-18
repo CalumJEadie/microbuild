@@ -17,11 +17,13 @@ Example
 The build script is written in pure Python and microbuild takes care of managing
 any dependancies between tasks and generating a command line interface.
 
-Tasks are just regular Python functions marked with the `@task()` decorator. Dependancies
-are specified with `@task()` too. Tasks can be ignored with the `@ignore` decorator.
+Tasks are just regular Python functions marked with the ``@task()`` decorator. Dependancies
+are specified with ``@task()`` too. Tasks can be ignored with the ``@ignore`` decorator.
 
-After defining all tasks `build(sys.modules[__name__],sys.argv[1:])` is called to
+After defining all tasks ``build(sys.modules[__name__],sys.argv[1:])`` is called to
 run the build.
+
+::
 
     # example.py
     import sys
@@ -53,7 +55,9 @@ run the build.
             
 The command line interface and help is automatically generated. Task descriptions
 are extracted from function docstrings.
-        
+
+::
+    
     $ ./example.py -h
     usage: example.py [-h] task
 
@@ -70,7 +74,9 @@ are extracted from function docstrings.
       images      Prepare images.
           
 Dependancies between tasks are taken care of too.
-    
+
+::
+ 
     $ ./example.py android
     [ example.py - Starting task "clean" ]
     Cleaning build directory...
@@ -88,15 +94,17 @@ Installation
 
 You can install microbuild from the Python Package Index (PyPI) or from source.
 
-Using pip:
+Using pip::
 
     $ pip microbuild
 
-Using easy_install:
+Using easy_install::
 
     $ easy_install microbuild
     
 License
 =======
 
-microbuild is licensed under a MIT license. See `LICENSE.txt] https://github.com/CalumJEadie/microbuild/blob/master/LICENSE.txt`_.
+microbuild is licensed under a MIT license. See `LICENSE.txt`_.
+
+.. _LICENSE.txt: https://github.com/CalumJEadie/microbuild/blob/master/LICENSE.txt
