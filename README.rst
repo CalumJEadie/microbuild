@@ -27,7 +27,7 @@ run the build.
 
     # example.py
     import sys
-    from microbuild.microbuild import task,build
+    from microbuild.microbuild import task,ignore,build
 
     @task()
     def clean():
