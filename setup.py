@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
    name="microbuild",
-   version="0.3.0",
+   version="0.3.1",
    author="Calum J. Eadie",
    author_email="calum@calumjeadie.com",
    url="https://github.com/CalumJEadie/microbuild",
