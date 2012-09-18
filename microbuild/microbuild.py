@@ -18,7 +18,7 @@ _LOGGING_FORMAT = "[ %(name)s - %(message)s ]"
     
 def build(module,args):
     """
-    Build the specified module.
+    Build the specified module with specified arguments.
     
     @type module: module
     @type args: list of arguments
@@ -34,33 +34,17 @@ def build(module,args):
     _run_from_task_name(module,args.task)
     
 def _run_from_task_name(module,task_name):
+    """
+    @type module: module
+    @type task_name: string
+    @param task_name: Task name, exactly corresponds to function name.
+    """
 
     # Create logger.
     logger = _get_logger(module)
     
     task = getattr(module,task_name)
     _run(module,logger,task,set([]))
-    
-def _get_logger(module):
-
-    # Create Logger
-    logger = logging.getLogger(os.path.basename(module.__file__))
-    logger.setLevel(logging.DEBUG)
-
-    # Create console handler and set level to debug
-    ch = logging.StreamHandler()
-    ch.setLevel(logging.DEBUG)
-
-    # Create formatter
-    formatter = logging.Formatter(_LOGGING_FORMAT)
-
-    # Add formatter to ch
-    ch.setFormatter(formatter)
-
-    # Add ch to logger
-    logger.addHandler(ch)
-
-    return logger
     
 def _run(module,logger,task,completed_tasks):
     """
@@ -104,6 +88,10 @@ def _run(module,logger,task,completed_tasks):
     return completed_tasks
 
 def _create_parser(module):
+    """
+    @type module: module
+    @rtype: argparse.ArgumentParser
+    """
 
     # Get all tasks.
     tasks = _get_tasks(module)
@@ -195,6 +183,8 @@ task = _TaskDecorator
 def ignore(obj):
     """
     Decorator to specify that a task should be ignored.
+    
+    @type obj: function or Task, depending on order @ignore and @task used
     """
     obj.ignorable = True
     return obj
@@ -230,6 +220,8 @@ class Task(object):
 def _get_tasks(module):
     """
     Returns all functions marked as tasks.
+    
+    @type module: module
     """
     # Get all functions that are marked as task and pull out the task object
     # from each (name,value) pair.
@@ -238,5 +230,32 @@ def _get_tasks(module):
 def _get_max_name_length(module):
     """
     Returns the length of the longest task name.
+    
+    @type module: module
     """
     return max([len(task.__name__) for task in _get_tasks(module)])
+    
+def _get_logger(module):
+    """
+    @type module: module
+    @rtype: logging.Logger
+    """
+
+    # Create Logger
+    logger = logging.getLogger(os.path.basename(module.__file__))
+    logger.setLevel(logging.DEBUG)
+
+    # Create console handler and set level to debug
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.DEBUG)
+
+    # Create formatter
+    formatter = logging.Formatter(_LOGGING_FORMAT)
+
+    # Add formatter to ch
+    ch.setFormatter(formatter)
+
+    # Add ch to logger
+    logger.addHandler(ch)
+
+    return logger
