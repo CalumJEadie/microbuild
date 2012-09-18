@@ -1,14 +1,18 @@
-# microbuild - Lightweight Python Build Tool.
+===========================================
+microbuild - Lightweight Python Build Tool.
+===========================================
 
 Calum J. Eadie (www.calumjeadie.com)
 
-## Features
+Features
+========
 
 * Really quick to learn.
 * Manages dependancies between tasks.
 * Automatically generates a command line interface.
 
-## Example
+Example
+=======
 
 The build script is written in pure Python and microbuild takes care of managing
 any dependancies between tasks and generating a command line interface.
@@ -79,7 +83,8 @@ Dependancies between tasks are taken care of too.
     Packaging android app...
     [ example.py - Completed task "android" ]
 
-## Installation
+Installation
+============
 
 You can install microbuild from the Python Package Index (PyPI) or from source.
 
@@ -91,8 +96,7 @@ Using easy_install:
 
     $ easy_install microbuild
     
-# License
+License
+=======
 
-microbuild is licensed under a MIT license. See [LICENSE.txt][1].
-
-[1]: https://github.com/CalumJEadie/microbuild/blob/master/LICENSE.txt
+microbuild is licensed under a MIT license. See `LICENSE.txt] https://github.com/CalumJEadie/microbuild/blob/master/LICENSE.txt`_.
