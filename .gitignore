@@ -2,3 +2,6 @@
 apidocs
 MANIFEST
 dist
+.project
+build
+.pydevproject
