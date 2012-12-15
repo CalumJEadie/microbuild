@@ -5,3 +5,6 @@ dist
 .project
 build
 .pydevproject
+*.sublime-project
+*.sublime-workspace
+*.DS_Store
