@@ -105,14 +105,21 @@ Dependancies between tasks are taken care of too.
 Contributing
 ============
 
-microbuild is hosted at https://github.com/CalumJEadie/microbuild and contributions are very welcome.
+microbuild is hosted at https://github.com/CalumJEadie/microbuild and contributions are
+very welcome.
 
 epydoc_ is used for documentation generation and unittest_ for tests.
 
-Run ``build.py apidoc`` to generate documentation and ``build.py test`` to run all unit tests.
+Run ``build.py apidoc`` to generate documentation and ``build.py test`` to run all unit
+tests.
+
+`Raghunandan Rao <https://github.com/rags>`_ has made some great contributions, including
+Rake style parameter passing to tasks and running tasks by typing the first few characters.
+You can check these out at the pynt_ fork.
 
 .. _epydoc: http://epydoc.sourceforge.net
 .. _unittest: http://docs.python.org/2/library/unittest.html
+.. _pynt: https://github.com/rags/pynt
 
 License
 =======
