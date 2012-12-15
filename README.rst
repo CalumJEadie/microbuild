@@ -11,6 +11,19 @@ Features
 * Manages dependancies between tasks.
 * Automatically generates a command line interface.
 
+Installation
+============
+
+You can install microbuild from the Python Package Index (PyPI) or from source.
+
+Using pip::
+
+    $ pip install microbuild
+
+Using easy_install::
+
+    $ easy_install microbuild
+
 Example
 =======
 
@@ -89,19 +102,18 @@ Dependancies between tasks are taken care of too.
     Packaging android app...
     [ example.py - Completed task "android" ]
 
-Installation
+Contributing
 ============
 
-You can install microbuild from the Python Package Index (PyPI) or from source.
+microbuild is hosted at https://github.com/CalumJEadie/microbuild and contributions are very welcome.
 
-Using pip::
+epydoc_ is used for documentation generation and unittest_ for tests.
 
-    $ pip microbuild
+Run ``build.py apidoc`` to generate documentation and ``build.py test`` to run all unit tests.
 
-Using easy_install::
+.. _epydoc: http://epydoc.sourceforge.net
+.. _unittest: http://docs.python.org/2/library/unittest.html
 
-    $ easy_install microbuild
-    
 License
 =======
 
